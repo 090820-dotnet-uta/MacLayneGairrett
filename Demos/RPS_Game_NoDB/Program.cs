@@ -182,7 +182,7 @@ namespace RPS_Game_NoDB
             {
                 System.Console.WriteLine($"This players name is {player.Name} and he has {player.record["wins"]} wins and {player.record["losses"]} losses");
             }
-
+        
         }
 
     }//end of program
