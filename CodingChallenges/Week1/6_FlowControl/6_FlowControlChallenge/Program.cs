@@ -16,7 +16,20 @@ namespace _6_FlowControl
         // and returns the valid int.
         public static int GetValidTemperature()
         {
-            return 1;
+            int temp_int;
+
+            //This loop will make sure the user inputs an int between -40 & 130
+            while(true){
+                Console.WriteLine("Please enter an integer for Farenheit temperature between -40 and 130");
+                string user_temp = System.Console.ReadLine();
+                bool intResultTryParse = int.TryParse(user_temp, out temp_int);
+
+                if(intResultTryParse && (temp_int > -40 && temp_int < 130))
+                break;
+
+                System.Console.WriteLine("\n\tEntry is not valid! Try entering an integer.");
+            }
+            return temp_int;
         }
 
         // This method has one int parameter
@@ -33,6 +46,35 @@ namespace _6_FlowControl
         // 100 <= n < 135 = hottest
         public static void GiveActivityAdvice(int temp)
         {
+            switch(temp){
+                case int n when (n < -20):
+                System.Console.WriteLine("It's hella cold, bundle up with everything, or don't go outside!");
+                break;
+                case int n when (n < 0):
+                System.Console.WriteLine("It's pretty cold outside, grab a  2 or 3 winter coats, and beanie!");
+                break;
+                case int n when (n < 20):
+                System.Console.WriteLine("It's cold outside, wear a winter coat and long sleeve shirt.");
+                break;
+                case int n when (n < 40):
+                System.Console.WriteLine("It's thawed out finally, wear a hoodie and some jeans.");
+                break;
+                case int n when (n < 60):
+                System.Console.WriteLine("It feels like Autumn, wear a short sleeve shirt and some jeans.");
+                break;
+                case int n when (n < 80):
+                System.Console.WriteLine("It's perfect outdoor workout temperature, wear shorts and t-shirt.");
+                break;
+                case int n when (n < 90):
+                System.Console.WriteLine("It's niiice outside, wear a tank top, sandals, and sun glasses!");
+                break;
+                case int n when (n < 100):
+                System.Console.WriteLine("It's hella hot outside, go swimming!");
+                break;
+                case int n when (n < 130):
+                System.Console.WriteLine("It's the hottest outside, DO NOT GO OUTSIDE!");
+                break;
+            }
         }
 
         // This method gets a username and password from the user
@@ -40,6 +82,11 @@ namespace _6_FlowControl
         // names in the method.
         public static void Register()
         {
+            System.Console.WriteLine("Please pick your username.");
+            username = System.Console.ReadLine();
+            System.Console.WriteLine("Please pick your password.");
+            password = System.Console.ReadLine();
+            System.Console.WriteLine("Thank you for registering.");
         }
 
         // This method gets username and password from the user and
@@ -49,9 +96,16 @@ namespace _6_FlowControl
         // prompted again for the username and password.
         public static bool Login()
         {
-            return true;
-        }
+            System.Console.WriteLine("Please enter your username.");
+            string user = System.Console.ReadLine();
+            System.Console.WriteLine("Please enter your password.");
+            string pword = System.Console.ReadLine();
 
+            if(user.Equals(username) && pword.Equals(password)){
+                return true;
+            }
+            else{ return false; }
+        }
         // This method as one int parameter.
         // It chack is the int is <=42, between 
         // 43 and 78 inclusive, or > 78.
@@ -59,6 +113,13 @@ namespace _6_FlowControl
         // advice is given. 
         public static void GetTemperatureTernary(int temp)
         {
+            temp = GetValidTemperature();
+            string too_cold = $"{temp} is too cold!";
+            string ok = $"{temp} is an ok temperature.";
+            string too_hot = $"{temp} is too hot!";
+            string answer;
+            answer = (temp <= 42 ? too_cold : (temp <= 78 ? ok : too_hot));
+            System.Console.WriteLine(answer);
         }
     }//end of Program()
 }
