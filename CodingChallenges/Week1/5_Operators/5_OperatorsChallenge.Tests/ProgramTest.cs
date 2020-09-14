@@ -24,13 +24,13 @@ namespace _5_OperatorsChallenge.Tests
         [Theory]
         [MemberData(nameof(_singleNumbers))]
         public void IncrementShouldIncrement(int input){
-            Assert.Equal(++input, Program.Increment(input));
+            Assert.Equal(Program.Increment(input), ++input);
         }
 
         [Theory]
         [MemberData(nameof(_singleNumbers))]
         public void DecrementShouldDecrement(int input){
-            Assert.Equal(--input, Program.Decrement(input));
+            Assert.Equal(Program.Decrement(input), --input);
         }
 
         [Theory]
