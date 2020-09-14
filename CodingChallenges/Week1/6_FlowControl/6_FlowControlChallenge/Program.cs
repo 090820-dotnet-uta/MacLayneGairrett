@@ -48,25 +48,25 @@ namespace _6_FlowControl
         {
             switch(temp){
                 case int n when (n < -20):
-                System.Console.WriteLine("It's hella cold, bundle up with everything, or don't go outside!");
+                System.Console.WriteLine("It's hella cold, don't go outside!");
                 break;
                 case int n when (n < 0):
-                System.Console.WriteLine("It's pretty cold outside, grab a  2 or 3 winter coats, and beanie!");
+                System.Console.WriteLine("It's pretty cold outside, wear as much clothes as possible.");
                 break;
                 case int n when (n < 20):
-                System.Console.WriteLine("It's cold outside, wear a winter coat and long sleeve shirt.");
+                System.Console.WriteLine("It's cold outside, wear a winter coat.");
                 break;
                 case int n when (n < 40):
                 System.Console.WriteLine("It's thawed out finally, wear a hoodie and some jeans.");
                 break;
                 case int n when (n < 60):
-                System.Console.WriteLine("It feels like Autumn, wear a short sleeve shirt and some jeans.");
+                System.Console.WriteLine("It feels like Autumn, wear a t-shirt and some jeans.");
                 break;
                 case int n when (n < 80):
                 System.Console.WriteLine("It's perfect outdoor workout temperature, wear shorts and t-shirt.");
                 break;
                 case int n when (n < 90):
-                System.Console.WriteLine("It's niiice outside, wear a tank top, sandals, and sun glasses!");
+                System.Console.WriteLine("It's niiice outside, wear a tank top, and sun glasses!");
                 break;
                 case int n when (n < 100):
                 System.Console.WriteLine("It's hella hot outside, go swimming!");
@@ -86,7 +86,8 @@ namespace _6_FlowControl
             username = System.Console.ReadLine();
             System.Console.WriteLine("Please pick your password.");
             password = System.Console.ReadLine();
-            System.Console.WriteLine("Thank you for registering.");
+            System.Console.WriteLine("saved");
+
         }
 
         // This method gets username and password from the user and
@@ -102,9 +103,10 @@ namespace _6_FlowControl
             string pword = System.Console.ReadLine();
 
             if(user.Equals(username) && pword.Equals(password)){
+                System.Console.WriteLine($"Welcome {user}");
                 return true;
             }
-            else{ return false; }
+            else return false; 
         }
         // This method as one int parameter.
         // It chack is the int is <=42, between 
