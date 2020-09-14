@@ -6,18 +6,43 @@ namespace _8_LoopsChallenge
     {
         public static void Main(string[] args)
         {
+            UseFor();
+            UseDoWhile();
+            UseWhile();
         }
         
         public static void UseFor()
         {
+            for (int n = 1; n < 50; n = n + 2){
+                System.Console.WriteLine($"{n}");
+            }
         }
 
         public static void UseDoWhile()
         {
+            int n = 0;
+            do{
+                System.Console.WriteLine($"{n} ");
+                n = n + 2;
+            }
+            while (n <= 50);
         }
 
         public static void UseWhile()
         {
+            int n = 0;
+            while(n < 100){
+                n = n + 3;
+                if(n > 100){
+                break;
+                }
+                if (n % 5 == 0){
+                System.Console.WriteLine("Skipping this number.");
+                }
+                else{
+                System.Console.WriteLine(n);
+                }
+            }
         }
     }
 }
