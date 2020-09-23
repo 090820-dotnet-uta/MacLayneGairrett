@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 
 namespace P0
 {
@@ -52,7 +53,7 @@ namespace P0
                     }
                     else if (MainChoice == 2)//see the past orders from this location or of current user.
                     {
-                        OrdersMenu(context, currentCust);
+                        double test = LocationOrdersMenu(locationChoice, context);
                     }
                     else if (MainChoice == 3)//checks cart or allows them to checkout
                     {
@@ -350,14 +351,14 @@ namespace P0
 
         }
 
-        public static void OrdersMenu(DbContextClass context, Customer currentCustomer, int locationId)
+        public static double LocationOrdersMenu(DbContextClass context,  int locationId)
         {
             int choice1;
             bool inputInt1;
 
             do
             {
-                Console.WriteLine($"1) View the order history for this location.\n2) View the past orders for {currentCustomer.Username}");
+                Console.WriteLine($"1) View the order history for this location.\n2) Exit.");
                 string input = Console.ReadLine();
                 inputInt1 = int.TryParse(input, out choice1);
             } while (!inputInt1 || choice1 <= 0 || choice1 >= 3);
@@ -370,41 +371,27 @@ namespace P0
                 Console.WriteLine($"This is a list of of products ordered from our store in {locationName}.");
                 var pastOrders = context.Orders.Where(x => x.LocationId == locationId).AsNoTracking();
                 double TotalProfit = 0;
-
-                foreach (var i in pastOrders)
+                using (var context2 = new DbContextClass())
                 {
-                    var prod = context.Products.Find(i.ProductId);
-                    Console.WriteLine($"Product: {prod.ProductTitle}\t Price: {prod.Price}\t Ordered at: {i.CheckoutTime}\t Ordered by: {i.CustomerId}");
-                    TotalProfit += prod.Price;
-                }
-                Console.WriteLine($"The total profit from this location is ${Math.Round(TotalProfit, 2)}");
-                
+
+                    foreach (var i in pastOrders)
+                    {
+                        var prod = context2.Products.Find(i.ProductId);
+                        Console.WriteLine($"Product: {prod.ProductTitle}\t Price: {prod.Price}\t Ordered at: {i.CheckoutTime}\t Ordered by: {i.CustomerId}");
+                        TotalProfit += prod.Price;
+                    }
+                }  
+                 Console.WriteLine($"The total profit from this location is ${Math.Round(TotalProfit, 2)}");
+                 return TotalProfit;
             }
 
             if (choice1 == 2)
             {
-
-                if (context.Orders.ToList().Count == 0)
-                {
-                    
-                }
-                else if (context.Orders.ToList().Count != 0)
-                {
-                    if (context.Orders.Where(y => y.CustomerId == currentCustomer.CustomerId).Any())
-                    {
-                        foreach (var x in context.Orders.Where(e => e.CustomerId == currentCustomer.CustomerId).ToList())
-                        {
-                            Console.WriteLine($"You have bought {x.Price} {x.ProductId} on {x.CheckoutTime} from {x.LocationId}");
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("You haven't made any orders yet.");
-                    }
-                    
-                }
+                Environment.Exit(0);
             }
-        }
+            return 0;        
+        } 
+
         public static double ViewCart(Cart Usercart)
         {
             Usercart.Total = 0;//resets the costs in the cart
